@@ -15,11 +15,11 @@
                  <span>MASTER DATA</span>
                </a>
                <ul class='treeview-menu'>
-                <li><a href='index.php?aksi=aset'><i class='fa fa-arrows-h'></i> DATA ASET</a></li>
-                <li><a href='index.php?aksi=kategori'><i class='fa fa-arrows-h'></i> KATEGORI ASET</a></li>
+                <li><a href='index.php?aksi=informasi'><i class='fa fa-arrows-h'></i>INFORMASI</a></li>
+                <li><a href='index.php?aksi=galery'><i class='fa fa-arrows-h'></i>GALERY</a></li>
+                <li><a href='index.php?aksi=halaman'><i class='fa fa-arrows-h'></i>HALAMAN</a></li>
                </ul>
 </li>
-<li><a href="index.php?aksi=laporan"><i class="fa fa-calendar"></i> <span>LAPORAN ASET</span></a></li>
 <li><a href="index.php?aksi=admin"><i class="fa fa-users"></i> <span>ADMIN</span></a></li>
 <li><a href="logout.php"><i class="fa fa-sign-out"></i> <span>LOGOUT</span></a></li>
 </ul>

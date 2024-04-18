@@ -2,209 +2,578 @@
 $tanggal=date("Y");
 include "koneksi.php";
 ?>
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title><?php echo"$k_k[nama]";?></title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="tema/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="tema/assets/css/noscript.css" /></noscript>
-		<style type="text/css">
-				#bg:after {
-			-moz-transform: scale(1.125);
-			-webkit-transform: scale(1.125);
-			-ms-transform: scale(1.125);
-			transform: scale(1.125);
-			-moz-transition: -moz-transform 0.325s ease-in-out, -moz-filter 0.325s ease-in-out;
-			-webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out;
-			-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
-			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
-			background-image: url("foto/<?php echo"$k_k[gambar]";?>");
-			background-position: center;
-			background-size: cover;
-			background-repeat: no-repeat;
-			z-index: 1;
-		}
+<!DOCTYPE html>
+<html lang="en">
 
-       </style>	
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>SELAMAT DATANG</h1>
-								<h3>SI <?php echo"$k_k[nama_app]";?> </h3><p>Satu Aplikasi Untuk Kemudahan Implementasi Data <?php echo"$k_k[alias]";?>  <?php echo"$k_k[nama]";?></p>
-												<?php 
-        if(isset($_GET['alert'])){
-          if($_GET['alert'] == "gagal"){
-            echo "<div class='alert alert-danger'>LOGIN GAGAL! USERNAME DAN PASSWORD SALAH!</div>";
-          }else if($_GET['alert'] == "logout"){
-            echo "<div class='alert alert-success'>ANDA TELAH BERHASIL LOGOUT</div>";
-          }else if($_GET['alert'] == "belum_login"){
-            echo "<div class='alert alert-warning'>ANDA HARUS LOGIN UNTUK MENGAKSES DASHBOARD</div>";
-          }
-        }
-        ?>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">LOGIN</a></li>
-								<li><a href="#contact">Hubungi</a></li>
-								<li><a href="#work">INVENTORI</a></li>
-								<!--
-								<li><a href="#pegawai">PEGAWAI</a></li>
-								<li><a href="#about">Tentang</a></li>
-								
-								<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+<head>
+    <meta charset="utf-8">
+    <title><?php echo"$k_k[nama]";?></title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-				<!-- Main -->
-					<div id="main">
+    <!-- Favicon -->
+    <link href="tema/img/favicon.ico" rel="icon">
 
-						<!-- Intro -->
-							<article id="intro">
-			
-								<h2 class="major">LOGIN ADMIN</h2>
-						<form method="post" action="periksa_login.php">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">User Name</label>
-											<input type="text" placeholder="Username" name="username" required="required" autocomplete="off" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Password</label>
-											<input  type="password"  placeholder="Password" name="password" required="required" autocomplete="off" id="email" />
-											<input  type="hidden"   name="sebagai" value="administrator"/>
-										</div>
-											
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="login" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								</article>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
 
-						<!-- Work -->
-							<article id="work">
-							<h3 class="major">DATA <?php echo"$k_k[alias]";?>  <?php echo"$k_k[nama]";?> </h3>
-									<div class="table-wrapper">
-									<table id='example1' class='table table-bordered table-striped'>
-                                    <thead>
-                                        <tr> <th>No</th>
-                                            <th>Kategori</th>
-                                            <th>nama</th>
-                                            <th>jumlah</th>	 
-                                            <th>kondisi</th>	 
-          
-                                             
-                                        </tr>
-                                    </thead><tbody>
-				   <?php
-			
-$no=0;
-$sql=mysqli_query($koneksi," SELECT * FROM aset,kategori,ruang WHERE aset.id_kategori=kategori.id_kategori AND aset.id_ruang=ruang.id_ruang  ORDER BY aset.id_aset ASC");
-while ($t=mysqli_fetch_array($sql)){	
-$no++;
-                                    echo"
-                                        <tr><td>$no</td>
-                                            <td>$t[kategori]</td>
-                                            <td>$t[nama_aset]</td> 
-                                            <td>$t[jumlah]</td> 
-                                            <td>$t[kondisi]</td>
-						
-                                        </tr>";
-}?>
-                                    </tbody></table>
-									</div>
-								</article>
-							<article id="pegawai">
-								<h2 class="major">LOGIN PEGAWAI</h2>
-								<p> <?php echo"$k_k[nama]";?></p>
-						<form method="post" action="periksa_login.php">
-									<div class="fields">
-										<div class="field half">
-										<input type="hidden" name="sebagai" value="pegawai"/>
-											<label for="name">User Name</label>
-											<input type="text" placeholder="Username" name="username" required="required" autocomplete="off" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Password</label>
-											<input  type="password"  placeholder="Password" name="password" required="required" autocomplete="off" id="email" />
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="login" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								</article>
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-							</article>
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
-					</div>
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; <?php echo"$k_k[nama]";?> <?php echo"$tanggal";?></p>
-					</footer>
-			</div>
-		<!-- BG -->
-			<div id="bg"></div>
-		<!-- Scripts -->
-			<script src="tema/assets/js/jquery.min.js"></script>
-			<script src="tema/assets/js/browser.min.js"></script>
-			<script src="tema/assets/js/breakpoints.min.js"></script>
-			<script src="tema/assets/js/util.js"></script>
-			<script src="tema/assets/js/main.js"></script>
+    <!-- Libraries Stylesheet -->
+    <link href="tema/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="tema/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-	</body>
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="tema/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="tema/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-dark px-0">
+        <div class="row g-0 d-none d-lg-flex">
+            <div class="col-lg-6 ps-5 text-start">
+                <div class="h-100 d-inline-flex align-items-center text-white">
+                    <span>Ikuti Kami:</span>
+                    <a class="btn btn-link text-light" href="https://www.facebook.com/profile.php?id=100064785712792"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-link text-light" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-link text-light" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-link text-light" href="https://www.instagram.com/puprtanggamus/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-end">
+                <div class="h-100 topbar-right d-inline-flex align-items-center text-white py-2 px-5">
+                    <span class="fs-5 fw-bold me-2"><i class="fa fa-phone-alt me-2"></i>Kontak Kami:</span>
+                    <span class="fs-5 fw-bold">+62 81373052805</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <?php include "menu.php" ?>
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid px-0 mb-5">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="tema/img/carousel-1.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 text-start">
+                                    <p class="fs-5 fw-medium text-primary text-uppercase animated slideInRight">Dinas PUPR Kabupaten Tanggamus</p>
+                                    <h1 class="display-1 text-white mb-5 animated slideInRight">Pembangunan adalah Prioritas Utama Kami</h1>
+                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInRight">Explore More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="tema/img/carousel-2.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 text-start">
+                                    <p class="fs-5 fw-medium text-primary text-uppercase animated slideInRight">Dinas PUPR Kabupaten Tanggamus</p>
+                                    <h1 class="display-1 text-white mb-5 animated slideInRight">Solusi Masyarakat Sejahtra, Pembangunan Merata</h1>
+                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInRight">Explore More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="row gx-3 h-100">
+                        <div class="col-6 align-self-start wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="img-fluid" src="tema/img/about-1.jpg">
+                        </div>
+                        <div class="col-6 align-self-end wow fadeInDown" data-wow-delay="0.1s">
+                            <img class="img-fluid" src="tema/img/about-2.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <p class="fw-medium text-uppercase text-primary mb-2">Tetang Kami</p>
+                    <h1 class="display-5 mb-4">Kami Membangun Untuk Masyarakat</h1>
+                    <p class="mb-4">Kami ada untuk masyarakat kabuapten tanggamus, Kami Membangun Infrastruktur, Infrastruktur Berkualitas, Kualitas Masyarakat Hidup Meningkat</p>
+                    <p class="mb-4">Fungsi dan Tugas Kami</p>
+					<div class="d-flex align-items-center mb-4">
+                        <div class="ms-4">
+                            <p><i class="fa fa-check text-primary me-2"></i>Perencanaan Infrastruktur</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Pelaksanaan Proyek</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Pengawasan dan Pengendalian</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Pemeliharaan Infrastruktur</p>
+                            <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>Pengelolaan Perumahan</p>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-envelope-open text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Email us</p>
+                                    <h5 class="mb-0">pupr.tgms@gmail.com</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-phone-alt text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Call us</p>
+                                    <h5 class="mb-0">+62 81373052805</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Facts Start 
+    <div class="container-fluid facts my-5 p-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-certificate fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">25</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Years Experience</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">135</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Team Members</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.5s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-users fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">957</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Happy Clients</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.7s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-check-double fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">1839</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Projects Done</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    Facts End -->
+
+
+    <!-- Features Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative me-lg-4">
+                        <img class="img-fluid w-100" src="tema/img/feature.jpg" alt="">
+                        <span class="position-absolute top-50 start-100 translate-middle bg-white rounded-circle d-none d-lg-block" style="width: 120px; height: 120px;"></span>
+                        <button type="button" class="btn-play" data-bs-toggle="modal"
+                            data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <p class="fw-medium text-uppercase text-primary mb-2">Kenapa Kami Ada</p>
+                    <h1 class="display-5 mb-4">PUPR: Menghadirkan Layanan Infrastruktur yang Terpercaya</h1>
+                    <p class="mb-4">Kami adalah sebuah lembaga pemerintah di Indonesia yang bertanggung jawab dalam pembangunan dan pengelolaan infrastruktur publik serta perumahan bagi masyarakat. Tugas utama dari Dinas PUPR adalah merencanakan, melaksanakan, dan mengawasi pembangunan serta pemeliharaan infrastruktur yang meliputi jalan, jembatan, irigasi, bendungan, gedung, fasilitas air minum, sanitasi, serta pembangunan perumahan untuk rakyat</p>
+                    <div class="row gy-4">
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h4>Perencanaan Infrastruktur:</h4>
+                                    <span>Merencanakan pembangunan infrastruktur dan perumahan sesuai dengan kebutuhan masyarakat dan arah pembangunan nasional.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h4>Pemeliharaan Infrastruktur:</h4>
+                                    <span>Bertanggung jawab atas pemeliharaan dan perawatan infrastruktur yang telah dibangun agar tetap berfungsi dengan baik dan aman digunakan oleh masyarakat.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h4>Pengelolaan Perumahan:</h4>
+                                    <span>Mengelola program perumahan bagi masyarakat, termasuk dalam hal pembangunan rumah subsidi, perumahan bagi masyarakat berpenghasilan rendah (MBR), dan peningkatan akses terhadap perumahan layak huni.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+
+
+    <!-- Video Modal Start -->
+    <div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="ratio ratio-16x9">
+                        <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Modal End -->
+
+
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Informasi Dinas PUPR</p>
+                <h1 class="display-5 mb-4">Informasi Masyarat Umum</h1>
+            </div>
+            <div class="row gy-5 gx-4">
+                <?php $tebaru=mysqli_query($koneksi," SELECT * FROM berita ORDER BY id_berita DESC  LIMIT 3");
+while ($t=mysqli_fetch_array($tebaru)){ ?>
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item">
+                        <img class="img-fluid" src="foto/data/<?php echo"$t[gambar]";?>" alt="">
+                        <div class="service-img">
+                            <img class="img-fluid" src="foto/data/<?php echo"$t[gambar]";?>" alt="">
+                        </div>
+                        <div class="service-detail">
+                            <div class="service-title">
+                                <hr class="w-25">
+                                <h3 class="mb-0">INFORMASI DINAS PUPR KAB.TANGGAMUS</h3>
+                                <hr class="w-25">
+                            </div>
+                            <div class="service-text">
+                                <p class="text-white mb-0"><?php echo"$t[judul]";?> </p>
+                            </div>
+                        </div>
+                        <a class="btn btn-light" href="">Read More</a>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+
+    <!-- Project Start -->
+    <div class="container-fluid bg-dark pt-5 my-5 px-0">
+        <div class="text-center mx-auto mt-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <p class="fw-medium text-uppercase text-primary mb-2">Prejek Dinas PUPR</p>
+            <h1 class="display-5 text-white mb-5">Kami Membangun Untuk Masyarakat</h1>
+        </div>
+        <div class="owl-carousel project-carousel wow fadeIn" data-wow-delay="0.1s">
+            <a class="project-item" href="">
+                <img class="img-fluid" src="tema/img/project-1.jpg" alt="">
+                <div class="project-title">
+                    <h5 class="text-primary mb-0">Pembangunan Perumahan Rakyat</h5>
+                </div>
+            </a>
+            <a class="project-item" href="">
+                <img class="img-fluid" src="tema/img/project-2.jpg" alt="">
+                <div class="project-title">
+                    <h5 class="text-primary mb-0">Bina Marga Dinas PUPR</h5>
+                </div>
+            </a>
+            <a class="project-item" href="">
+                <img class="img-fluid" src="tema/img/project-3.jpg" alt="">
+                <div class="project-title">
+                    <h5 class="text-primary mb-0">pembangunan jembatan</h5>
+                </div>
+            </a>
+            <a class="project-item" href="">
+                <img class="img-fluid" src="tema/img/project-4.jpg" alt="">
+                <div class="project-title">
+                    <h5 class="text-primary mb-0">Meninjau sungai way pihabung</h5>
+                </div>
+            </a>
+            <a class="project-item" href="">
+                <img class="img-fluid" src="tema/img/project-5.jpg" alt="">
+                <div class="project-title">
+                    <h5 class="text-primary mb-0">Forum Penataan Ruang</h5>
+                </div>
+            </a>
+            <a class="project-item" href="">
+                <img class="img-fluid" src="tema/img/project-6.jpg" alt="">
+                <div class="project-title">
+                    <h5 class="text-primary mb-0">perencanaan jembatan</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Project End -->
+
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Jajaran Kami</p>
+                <h1 class="display-5 mb-5">Jajaran Dinas PUPR Kab.Tanggamus</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item">
+                        <img class="img-fluid" src="tema/img/team-1.jpg" alt="">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 btn-square bg-primary" style="width: 90px; height: 90px;">
+                                <i class="fa fa-2x fa-share text-white"></i>
+                            </div>
+                            <div class="position-relative overflow-hidden bg-light d-flex flex-column justify-content-center w-100 ps-4" style="height: 90px;">
+                                <h5>Riswanda djunaidi, S.E.,M.M</h5>
+                                <span class="text-primary">Kepala Dinas</span>
+                                <div class="team-social">
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>                                                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="team-item">
+                        <img class="img-fluid" src="tema/img/team-2.jpg" alt="">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 btn-square bg-primary" style="width: 90px; height: 90px;">
+                                <i class="fa fa-2x fa-share text-white"></i>
+                            </div>
+                            <div class="position-relative overflow-hidden bg-light d-flex flex-column justify-content-center w-100 ps-4" style="height: 90px;">
+                                <h5>Ari Yudha, S.T., M.T</h5>
+                                <span class="text-primary">Sekdis</span>
+                                <div class="team-social">
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="team-item">
+                        <img class="img-fluid" src="tema/img/team-3.jpg" alt="">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 btn-square bg-primary" style="width: 90px; height: 90px;">
+                                <i class="fa fa-2x fa-share text-white"></i>
+                            </div>
+                            <div class="position-relative overflow-hidden bg-light d-flex flex-column justify-content-center w-100 ps-4" style="height: 90px;">
+                                <h5>Toni Saputra, S.T., M.T</h5>
+                                <span class="text-primary">Kabid program</span>
+                                <div class="team-social">
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-dark rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+    <!-- Testimonial Start 
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Testimonial</p>
+                <h1 class="display-5 mb-5">What Our Clients Say!</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                <div class="testimonial-item text-center">
+                    <div class="testimonial-img position-relative">
+                        <img class="img-fluid rounded-circle mx-auto mb-5" src="img/testimonial-1.jpg">
+                        <div class="btn-square bg-primary rounded-circle">
+                            <i class="fa fa-quote-left text-white"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-text text-center rounded p-4">
+                        <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
+                        <h5 class="mb-1">Client Name</h5>
+                        <span class="fst-italic">Profession</span>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <div class="testimonial-img position-relative">
+                        <img class="img-fluid rounded-circle mx-auto mb-5" src="img/testimonial-2.jpg">
+                        <div class="btn-square bg-primary rounded-circle">
+                            <i class="fa fa-quote-left text-white"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-text text-center rounded p-4">
+                        <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
+                        <h5 class="mb-1">Client Name</h5>
+                        <span class="fst-italic">Profession</span>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <div class="testimonial-img position-relative">
+                        <img class="img-fluid rounded-circle mx-auto mb-5" src="img/testimonial-3.jpg">
+                        <div class="btn-square bg-primary rounded-circle">
+                            <i class="fa fa-quote-left text-white"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-text text-center rounded p-4">
+                        <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
+                        <h5 class="mb-1">Client Name</h5>
+                        <span class="fst-italic">Profession</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   Testimonial End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Alamat Kami</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Jalan A. Yani No. 09 Komplek Pemda Tanggamus</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+62 81373052805</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i> pupr.tgms@gmail.com</p>
+                    <div class="d-flex pt-3">
+                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Pelayanan Kantor Kami</h5>
+                    <p class="mb-1">Senin - Kamis</p>
+                    <h6 class="text-light">08:00 am - 15:00 pm</h6>
+                    <p class="mb-1">Jumat</p>
+                    <h6 class="text-light">09:00 am - 14:00 pm</h6>
+                    <p class="mb-1">Sabtu - Minggu</p>
+                    <h6 class="text-light">Tutup</h6>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative w-100">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright bg-dark py-4">
+        <div class="container text-center">
+            <p class="mb-2">Copyright &copy; <?php echo"$k_k[nama]";?> <?php echo"$tanggal";?>, All Right Reserved.</p>
+            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+            <p class="mb-0">Designed By <a class="fw-semi-bold" href="https://htmlcodex.com">HTML Codex</a></p>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="tema/lib/wow/wow.min.js"></script>
+    <script src="tema/lib/easing/easing.min.js"></script>
+    <script src="tema/lib/waypoints/waypoints.min.js"></script>
+    <script src="tema/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="tema/lib/counterup/counterup.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="tema/js/main.js"></script>
+</body>
+
 </html>

@@ -43,212 +43,6 @@ echo"<div class='row'>
 elseif($_GET['aksi']=='ikon'){
 include "../ikon.php";
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////
-elseif($_GET['aksi']=='kategori'){
-echo"
-<div class='col-lg-12'>
-                    <div class='panel panel-default'>
-                        <div class='panel-heading'>
-			Data Kategori Artikel
-                        </div>
-                        <div class='panel-body'>
-                            <ul class='nav nav-pills'>
-                                <li class='active'><a href='#home-pills' data-toggle='tab'>Data Kategori</a>
-                                </li>
-                                <li><a href='#profile-pills' data-toggle='tab'>Input Kategori</a>
-                                </li>
-                               
-                            </ul>
-
-                            <div class='tab-content'>
-                                <div class='tab-pane fade in active' id='home-pills'>
-                                    <h4>Data Kategori </h4>
-                                   
-				   <div class='panel-body'>
-                            <div class='table-responsive'>
-                                <table id='example1' class='table table-bordered table-striped'>
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                        </tr>
-                                    </thead>
-				    ";
-					$no=0;
-				$tebaru=mysqli_query($koneksi," SELECT * FROM kategori ORDER BY id_kategori DESC ");
-while ($t=mysqli_fetch_array($tebaru)){
-              
-$no++;    
-                                    echo"<tbody>
-                                        <tr>
-                                            <td>$no</td>
-                                            <td>	       <div class='btn-group'>
-                      <button type='button' class='btn btn-info'>$t[kategori]</button>
-                      <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>
-                        <span class='caret'></span>
-                        <span class='sr-only'>Toggle Dropdown</span>
-                      </button>
-                      <ul class='dropdown-menu' role='menu'>
-                        <li><a href='index.php?aksi=editkategori&id_k=$t[id_kategori]'>edit</a></li>
-                        <li><a href='master/kategori.php?id_k=$t[id_kategori]&act=hapus' onclick=\"return confirm ('Apakah yakin ingin menghapus $t[kategori] ?')\">hapus</a></li>
-                      </ul>
-                    </div></td>
-                                        </tr>
-                                       
-                                    </tbody>";
-}
-                                echo"</table>
-                            </div>
-                        </div>
-				 </div>
-				 
-				 
-                                <div class='tab-pane fade' id='profile-pills'>
-                                    <h4>Input Kategori</h4>
-                                   
-<form id='form1' method='post' enctype='multipart/form-data' action='master/kategori.php?act=inputkategori'>
-         <div class='form-grup'>
-        <label>Nama </label>
-        <input type='text' class='form-control'  name='kat'/><br>
-		
-                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                                            <button type='submit' class='btn btn-primary'>Save </button>
-                                        </div> 
-    </form>  
-
-				</div></div>
-                            </div>
-                        </div>
-                    </div>
-           
-";}
-
-elseif($_GET['aksi']=='editkategori'){
-$tebaru=mysqli_query($koneksi," SELECT * FROM kategori WHERE id_kategori=$_GET[id_k] ");
-$t=mysqli_fetch_array($tebaru);
-echo"
-<div class='row'>
-                <div class='col-lg-12'>
-                    <div class='panel panel-default'>
-                        <div class='panel-heading'>EDIT
-                        </div>
-                        <div class='panel-body'>
-<form id='form1'  method='post' enctype='multipart/form-data' action='master/kategori.php?act=editkategori&id_k=$_GET[id_k]&gb=$t[gambar_kat]'>
-       <div class='form-grup'>
-        <label>Nama </label>
-        <input type='text' class='form-control' value='$t[kategori]' name='kat'/><br>
-		<label>Gambar</label>
-        <input type='file' class='smallInput' size='50'name='gambar'/><br><br />";
-		if($t['gambar_kat']!=0){echo"
-		<img src='../foto/kategori/$t[gambar_kat]' width='150' />";}
-            echo"</br><a href='index.php?aksi=kategori' class='btn btn-default' data-dismiss='modal'>kembali</a>
-                                            <button type='submit' class='btn btn-primary'>Save </button>
-                                        </div> </div>
-    </form></div> </div></div> </div></div> </div>
-";	
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-elseif($_GET['aksi']=='ruangan'){
-    echo"
-    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            <div class='panel-heading'>
-                Data Kategori Artikel
-                            </div>
-                            <div class='panel-body'>
-                                <ul class='nav nav-pills'>
-                                    <li class='active'><a href='#home-pills' data-toggle='tab'>Data ruangan</a>
-                                    </li>
-                                    <li><a href='#profile-pills' data-toggle='tab'>Input ruangan</a>
-                                    </li>
-                                   
-                                </ul>
-    
-                                <div class='tab-content'>
-                                    <div class='tab-pane fade in active' id='home-pills'>
-                                        <h4>Data Kategori </h4>
-                                       
-                       <div class='panel-body'>
-                                <div class='table-responsive'>
-                                    <table id='example1' class='table table-bordered table-striped'>
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                            </tr>
-                                        </thead>
-                        ";
-                        $no=0;
-                    $tebaru=mysqli_query($koneksi," SELECT * FROM ruang ORDER BY id_ruang DESC ");
-    while ($t=mysqli_fetch_array($tebaru)){
-                  
-    $no++;    
-                                        echo"<tbody>
-                                            <tr>
-                                                <td>$no</td>
-                                                <td>	       <div class='btn-group'>
-                          <button type='button' class='btn btn-info'>$t[nama_ruang]</button>
-                          <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>
-                            <span class='caret'></span>
-                            <span class='sr-only'>Toggle Dropdown</span>
-                          </button>
-                          <ul class='dropdown-menu' role='menu'>
-                            <li><a href='index.php?aksi=editruangan&id_ruang=$t[id_ruang]'>edit</a></li>
-                            <li><a href='hapus.php?aksi=hapusruangan&id_ruang=$t[id_ruang]' onclick=\"return confirm ('Apakah yakin ingin menghapus $t[nama_ruang] ?')\">hapus</a></li>
-                          </ul>
-                        </div></td>
-                                            </tr>
-                                           
-                                        </tbody>";
-    }
-                                    echo"</table>
-                                </div>
-                            </div>
-                     </div>
-                     
-                     
-                                    <div class='tab-pane fade' id='profile-pills'>
-                                        <h4>Input ruangan</h4>
-                                       
-    <form id='form1' method='post' enctype='multipart/form-data' action='input.php?aksi=inputruangan'>
-             <div class='form-grup'>
-            <label>Nama Ruangan</label>
-            <input type='text' class='form-control'  name='nama_ruang'/><br>
-            
-                                                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                                                <button type='submit' class='btn btn-primary'>Save </button>
-                                            </div> 
-        </form>  
-    
-                    </div></div>
-                                </div>
-                            </div>
-                        </div>
-               
-    ";}
-    
-    elseif($_GET['aksi']=='editruangan'){
-    $tebaru=mysqli_query($koneksi," SELECT * FROM ruang WHERE id_ruang=$_GET[id_ruang] ");
-    $t=mysqli_fetch_array($tebaru);
-    echo"
-    <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            <div class='panel-heading'>EDIT
-                            </div>
-                            <div class='panel-body'>
-    <form id='form1'  method='post' enctype='multipart/form-data' action='edit.php?aksi=proseseditruangan&id_ruang=$_GET[id_ruang]'>
-           <div class='form-grup'>
-            <label>Nama Ruangan</label>
-            <input type='text' class='form-control' value='$t[nama_ruang]' name='nama_ruang'/><br>
-            <a href='index.php?aksi=kategori' class='btn btn-default' data-dismiss='modal'>kembali</a>
-                                                <button type='submit' class='btn btn-primary'>Save </button>
-                                            </div> </div>
-        </form></div> </div></div> </div></div> </div>
-    ";	
-    }
-
 elseif($_GET['aksi']=='profil'){
 echo"			
 	<div class='row'>
@@ -344,31 +138,17 @@ echo"
 
 
 elseif($_GET['aksi']=='viewprofil'){
-
 $tebaru=mysqli_query($koneksi," SELECT * FROM profil WHERE id_profil=$_GET[id_p] ");
-
 $t=mysqli_fetch_array($tebaru);
-
 echo"<div class='row'>
-
                 <div class='col-lg-12'>
-
                     <div class='panel panel-default'>
-
                         <div class='panel-heading'>$t[nama]
-
                         </div>
-
                         <div class='panel-body'>
-
-		
-
 <a href='javascript:history.go(-1)' class='btn btn-info'> Kembali</a></div>
-
 ";
-
 echo"$t[isi] </div></div></div></div></div>";
-
 }
 
 
@@ -495,7 +275,7 @@ echo"
 
 
 
-elseif($_GET['aksi']=='aset'){
+elseif($_GET['aksi']=='informasi'){
 echo"<div class='row'>
                 <div class='col-lg-12'>
                     <div class='panel panel-default'>
@@ -505,46 +285,32 @@ echo"<div class='row'>
 			<button class='btn btn-info' data-toggle='modal' data-target='#uiModal'>
                                 Tambah Data
                             </button> <a href='laporan.php?aksi=aset' target='_blank' class='btn btn-info' ><i class='fa fa-print' ></i></span></a></br></br>
-                           	<div class='table-responsive'>		
-	 <table id='example1' class='table table-bordered table-striped'>
-                                    <thead>
-                                        <tr> <th>No</th>
-                                            <th>Kategori</th>
-                                            <th>nama aset</th>	
-                                            <th>Asal Barang</th>
-                                            <th>kondisi</th>	 
-                                            <th>aksi</th>	
-                                             
-                                        </tr>
-                                    </thead><tbody>
-				    ";
-			
-$no=0;
-$sql=mysqli_query($koneksi," SELECT * FROM aset,kategori WHERE aset.id_kategori=kategori.id_kategori  ORDER BY aset.id_aset DESC");
-while ($t=mysqli_fetch_array($sql)){	
-$no++;
-                                    echo"
-                                        <tr><td>$no</td>
-                                            <td>$t[kategori]</td>
-                                            <td>$t[nama_aset]</td> 
-                                            <td>$t[asal_aset]</td> 
-                                            <td>$t[kondisi]</td>
-							<td><div class='btn-group'>
-                      <button type='button' class='btn btn-info'>aksi</button>
-                      <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>
-                        <span class='caret'></span>
-                        <span class='sr-only'>Toggle Dropdown</span>
-                      </button>
-                      <ul class='dropdown-menu' role='menu'>
-                        <li><a href='index.php?aksi=editaset&id_aset=$t[id_aset]' title='Edit'><i class='fa fa-pencil'></i>edit</a></li>
-						<li><a href='hapus.php?aksi=hapusaset&id_aset=$t[id_aset]' onclick=\"return confirm ('Apakah yakin ingin menghapus $t[nama_aset] ?')\" title='Hapus'><i class='fa fa-remove'></i>hapus</li>
-                        </ul>
-                    </div></td>
-                                        </tr>";
+                            <div class='table-responsive'>
+                            <table id='example1' class='table table-bordered table-striped'>
+<thead>
+                                     <tr>
+                                         <th>No</th>
+                                         <th>judul</th>
+                                         <th>aksi</th>
+                                     </tr>
+                                 </thead>
+                 ";
+$no=0;                 
+$tebaru=mysqli_query($koneksi," SELECT * FROM berita ORDER BY id_berita DESC ");
+while ($t=mysqli_fetch_array($tebaru)){
+$no++;  
+                                 echo"<tbody>
+                                     <tr>
+                                         <td>$no</td>
+                                         <td>$t[judul]</td>
+                                         <td><a class='btn btn-info' href='index.php?aksi=editartikel&id_b=$t[id_berita]'>edit</a>
+                                             <a class='btn btn-info' href='master/artikel.php?id_b=$t[id_berita]&act=hapus&gbr=$t[gambar]' onclick=\"return confirm ('Apakah yakin ingin menghapus $t[judul] ?')\">hapus</a>
+                                         </td>
+                                     </tr>                                      
+                                 </tbody>";
 }
-                                echo"
-                                    </tbody></table>
-                            </div>
+                            echo"</table>
+                         </div>
                         </div>
                     </div>
                 </div>
@@ -562,49 +328,21 @@ echo"
                                             <h4 class='modal-title' id='H3'>Input Data</h4>
                                         </div>
                                         <div class='modal-body'>
-                                           <form role='form' method='post' action='input.php?aksi=inputaset'>
-                                            <div class='form-group'>
-                                            <label>Pilih Kategori</label>
-                                            <select class='form-control select2' style='width: 100%;' name=id_kategori>
-                                            <option value='' selected>Pilih Kategori</option>"; 
-                                             $sql=mysqli_query($koneksi,"SELECT * FROM kategori ORDER BY id_kategori");
-                                             while ($c=mysqli_fetch_array($sql))
-                                             {
-                                                echo "<option value=$c[id_kategori]>$c[kategori]</option>";
-                                             }
-                                                echo "
-                                            </select><br><br>
-                                            <label>Asal Barang</label>
-                                            <select class='form-control select2' style='width: 100%;' name=asal_aset>
-                                            <option value='' selected>Pilih Asal Aset</option>
-                                            <option value='Pekon'>Pekon</option>
-                                            <option value='Hibah'>Hibah</option>
-                                            <option value='Swadaya'>Swadaya</option>
-                                            </select><br><br>
-                                            <label>nama</label>
-						                    <input type='text' class='form-control' name='nama_aset'/><br>
-					                        <label>Merek/Type</label>
-						                    <input type='text' class='form-control' name='merek'/><br>
-                                            <label>Keterangan</label>
-                                            <input type='text' class='form-control' name='keterangan'/>
-						                    <input type='hidden' class='form-control' value='1' name='jumlah'/><br>
-                                            <label>Tahun Perolehan</label>
-						                    <input type='date' class='form-control' name='tgl_beli'/><br>
-                                            <label>Kondisi</label>
-                                            <select class='form-control select2' style='width: 100%;' name=kondisi>
-                                            <option value='' selected>Pilih Kondisi</option>
-                                            <option value='Baik'>Baik</option>
-                                            <option value='Perbaikan'>Perbaikan</option>
-                                            <option value='Rusak'>Rusak</option>
-                                            </select><br><br>
-                                            <label>Nilai Perolehan</label>
-						                    <input type='text' class='form-control' name='nilai'/><br>
-                                            <label>Luas/Ukuran</label>
-						                    <input type='text' class='form-control' name='luas'/><br>
-                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                                            <button type='submit' class='btn btn-primary'>Save </button>
-                                        </div>
-					</form>
+                                        <form id='form1' enctype='multipart/form-data' method='post' action='input.php?aksi=inputartikel'>
+                                        <div class='form-group'>
+                                    <label>Judul</label>
+                                    <input type='text' class='form-control' name='jd'/><br>
+                                    <label>Isi</label>
+                                    <textarea id='text-ckeditor' class='form-control' name='isi'></textarea></br>
+                                    <script>CKEDITOR.replace('text-ckeditor');</script>
+                                
+                                    <label>Gambar</label>
+                                    <input type='file' class='smallInput' size='50'name='gambar'/><br><br />
+                                        <div class='modal-footer'>
+                                                                        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                        <button type='submit' class='btn btn-primary'>Save </button>
+                                                                    </div> </div>
+                                </form>
                                     </div>
                                 </div>
                             </div>
