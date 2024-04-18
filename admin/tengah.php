@@ -282,9 +282,8 @@ echo"<div class='row'>
                         <div class='panel-heading'>INFORMASI 
                         </div>
                         <div class='panel-body'>	
-			<button class='btn btn-info' data-toggle='modal' data-target='#uiModal'>
-                                Tambah Data
-                            </button> <a href='laporan.php?aksi=aset' target='_blank' class='btn btn-info' ><i class='fa fa-print' ></i></span></a></br></br>
+			<button class='btn btn-info' data-toggle='modal' data-target='#uiModal'>Tambah Data</button> 
+            <a href='laporan.php?aksi=aset' target='_blank' class='btn btn-info' ><i class='fa fa-print' ></i></span></a></br></br>
                             <div class='table-responsive'>
                             <table id='example1' class='table table-bordered table-striped'>
 <thead>
@@ -303,11 +302,42 @@ $no++;
                                      <tr>
                                          <td>$no</td>
                                          <td>$t[judul]</td>
-                                         <td><a class='btn btn-info' href='index.php?aksi=editartikel&id_b=$t[id_berita]'>edit</a>
+                                         <td><button class='btn btn-info' data-toggle='modal' data-target='#uiedit$t[id_berita]'>edit</button>
                                              <a class='btn btn-info' href='master/artikel.php?id_b=$t[id_berita]&act=hapus&gbr=$t[gambar]' onclick=\"return confirm ('Apakah yakin ingin menghapus $t[judul] ?')\">hapus</a>
                                          </td>
                                      </tr>                                      
-                                 </tbody>";
+                                 </tbody>
+                                 
+                                 <div class='modal fade' id='uiedit$t[id_berita]' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                                            <h4 class='modal-title' id='H3'>Input Data</h4>
+                                        </div>
+                                        <div class='modal-body'>
+                                        <form id='form1' enctype='multipart/form-data' method='post' action='edit.php?aksi=proseseditartikel&id_b=$t[id_berita]&gb=$t[gambar]'>
+                                        <div class='form-group'>
+                                    <label>Judul</label>
+                                    <input type='text' class='form-control' value='$t[judul]' name='jd'/><br>
+                                    <label>Isi</label>
+                                    <textarea id='text-ckeditor' class='form-control' name='isi'>$t[isi]</textarea></br>
+                                    <script>CKEDITOR.replace('text-ckeditor');</script>
+                                    <img  src='../foto/data/$t[gambar]' alt='Preview Gambar' style='max-width: 200px; max-height: 200px;'></br>
+                                    <label>Gambar</label>
+                                    <input type='file' class='smallInput' size='50'name='gambar'/><br><br />
+                                        <div class='modal-footer'>
+                                                                        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                        <button type='submit' class='btn btn-primary'>Save </button>
+                                                                    </div> </div>
+                                </form>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                                 
+                                 ";
+                                 
 }
                             echo"</table>
                          </div>

@@ -5,11 +5,42 @@
   if($_SESSION['status'] != "administrator_logedin"){
     header("location:../login.php?alert=belum_login");
   }
+  $date=date ('d/m/Y');
+  $time=date ('h:i A');
 ///////////////////////////lihat/////////////////////////////////////////////
-if($_GET['aksi']=='proseseditaset'){
-mysqli_query($koneksi,"UPDATE aset SET id_kategori='$_POST[id_kategori]',asal_aset='$_POST[asal_aset]',nama_aset='$_POST[nama_aset]',merek='$_POST[merek]',
-nilai='$_POST[nilai]',jumlah='$_POST[jumlah]',tgl_beli='$_POST[tgl_beli]',kondisi='$_POST[kondisi]',keterangan='$_POST[keterangan]',luas='$_POST[luas]' WHERE id_aset='$_GET[id_aset]'");
-echo "<script>window.location=('index.php?aksi=aset')</script>";
+if($_GET['aksi']=='proseseditartikel'){
+	if (empty($_POST[jd]) || empty($_POST[isi])){
+		echo "<script>window.alert('Data yang Anda isikan belum lengkap');
+			   window.location=('javascript:history.go(-1)')</script>";
+			}
+        else{
+		   
+	   $lokasi_file=$_FILES[gambar][tmp_name];
+	   if(empty($lokasi_file)){
+	   
+	   mysqli_query($koneksi,"UPDATE berita SET judul='$_POST[jd]', tanggal='$date',  isi='$_POST[isi]' WHERE id_berita='$_GET[id_b]'");
+	   echo "<script>window.location=('index.php?aksi=informasi')</script>";
+	   
+	   }else{
+	   if($_GET[gb]==''){
+	   $tanggal=date("dmYhis");
+	   $file=$_FILES['gambar']['tmp_name'];
+	   $file_name=$_FILES['gambar']['name'];
+	   copy($file,"../foto/data/".$tanggal.".jpg");
+	   mysqli_query($koneksi,"UPDATE berita SET judul='$_POST[jd]', tanggal='$date',  isi='$_POST[isi]',gambar='$tanggal.jpg' WHERE id_berita='$_GET[id_b]'");
+	   echo "<script>window.location=('index.php?aksi=informasi')</script>";
+	   }else{
+	   
+	   
+	   $a=$_GET['gb'];
+	   $file=$_FILES['gambar']['tmp_name'];
+	   $file_name=$_FILES['gambar']['name'];
+	   copy($file,"../foto/data/".$a);
+	   mysqli_query($koneksi,"UPDATE berita SET judul='$_POST[jd]', tanggal='$date',  isi='$_POST[isi]' WHERE id_berita='$_GET[id_b]'");
+	   echo "<script>window.location=('index.php?aksi=informasi')</script>";
+		   }
+		  }
+		 } 
 }
 elseif($_GET['aksi']=='proseseditruangan'){
 	mysqli_query($koneksi,"UPDATE ruang SET nama_ruang='$_POST[nama_ruang]'");
