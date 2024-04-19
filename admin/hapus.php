@@ -6,19 +6,25 @@
     header("location:../login.php?alert=belum_login");
   }
 ///////////////////////////lihat/////////////////////////////////////////////
-if($_GET['aksi']=='hapuspendidikan'){
-mysqli_query($koneksi,"DELETE FROM pendidikan  WHERE id_pen='$_GET[id_pen]'");
-echo "<script>window.location=('index.php?aksi=pendidikan')</script>";
+if($_GET['aksi']=='hapusartikel'){
+  mysqli_query($koneksi,"DELETE FROM berita WHERE id_berita='$_GET[id_b]'");
+  $b=$_GET['gbr'];
+  $pathFile="../foto/data/$b";	   
+  unlink($pathFile);
+  echo "<script>window.location=('index.php?aksi=informasi')</script>";
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-elseif($_GET['aksi']=='hapusmenu'){
-mysqli_query($koneksi,"DELETE FROM menu  WHERE id_menu='$_GET[id_menu]'");
-echo "<script>window.location=('index.php?aksi=menu')</script>";
+elseif($_GET['aksi']=='hapusgaleri'){
+  mysqli_query($koneksi,"DELETE FROM galeri WHERE id_galeri='$_GET[id_g]'");
+  $b=$_GET['gbr'];
+  $pathFile="../foto/galleri/$b";	   
+  unlink($pathFile);
+echo "<script>window.location=('index.php?aksi=galeri')</script>";
 }
-elseif($_GET['aksi']=='hapusruangan'){
-  mysqli_query($koneksi,"DELETE FROM ruang  WHERE id_ruang='$_GET[id_ruang]'");
-  echo "<script>window.location=('index.php?aksi=ruangan')</script>";
+elseif($_GET['aksi']=='hapuskritik'){
+  mysqli_query($koneksi,"DELETE FROM kritik  WHERE id_kritik='$_GET[id_kritik]'");
+  echo "<script>window.location=('index.php?aksi=kritik')</script>";
   }
 elseif($_GET['aksi']=='hapussubmenu'){
   mysqli_query($koneksi,"DELETE FROM submenu  WHERE id_sub='$_GET[id_sub]'");

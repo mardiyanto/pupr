@@ -42,9 +42,26 @@ if($_GET['aksi']=='proseseditartikel'){
 		  }
 		 } 
 }
-elseif($_GET['aksi']=='proseseditruangan'){
-	mysqli_query($koneksi,"UPDATE ruang SET nama_ruang='$_POST[nama_ruang]'");
-	echo "<script>window.location=('index.php?aksi=ruangan')</script>";
+elseif($_GET['aksi']=='proseseditgaleri'){
+	if (empty($_POST[jd]) || empty($_POST[isi])){
+		echo "<script>window.alert('Data yang Anda isikan belum lengkap');
+			   window.location=('javascript:history.go(-1)')</script>";
+			}else{
+			
+	   $lokasi_file=$_FILES[gambar][tmp_name];
+	   if(empty($lokasi_file)){
+	   mysqli_query($koneksi,"UPDATE galeri SET judul='$_POST[jd]', keterangan='$_POST[isi]' WHERE id_galeri='$_GET[id_g]'");
+	   echo "<script>window.location=('index.php?aksi=galeri')</script>";
+	   }else{
+	   $a=$_GET['gb'];
+	   $file=$_FILES['gambar']['tmp_name'];
+	   $file_name=$_FILES['gambar']['name'];
+	   copy($file,"../foto/galleri/".$a);
+	   mysqli_query($koneksi,"UPDATE galeri SET judul='$_POST[jd]', keterangan='$_POST[isi]' WHERE id_galeri='$_GET[id_g]'");
+		  
+	   echo "<script>window.location=('index.php?aksi=galeri')</script>";
+		  }
+		 } 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 elseif($_GET['aksi']=='proseseditmenu'){

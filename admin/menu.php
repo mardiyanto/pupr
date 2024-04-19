@@ -16,7 +16,7 @@
                </a>
                <ul class='treeview-menu'>
                 <li><a href='index.php?aksi=informasi'><i class='fa fa-arrows-h'></i>INFORMASI</a></li>
-                <li><a href='index.php?aksi=galery'><i class='fa fa-arrows-h'></i>GALERY</a></li>
+                <li><a href='index.php?aksi=galeri'><i class='fa fa-arrows-h'></i>GALERY</a></li>
                 <li><a href='index.php?aksi=halaman'><i class='fa fa-arrows-h'></i>HALAMAN</a></li>
                </ul>
 </li>
