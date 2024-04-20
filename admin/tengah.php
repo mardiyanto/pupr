@@ -275,6 +275,116 @@ echo"
 
 
 
+elseif($_GET['aksi']=='halaman'){
+echo"<div class='row'>
+                <div class='col-lg-12'>
+                    <div class='panel panel-default'>
+                        <div class='panel-heading'>INFORMASI 
+                        </div>
+                        <div class='panel-body'>	
+			<button class='btn btn-info' data-toggle='modal' data-target='#uiModal'>Tambah Data</button> 
+            <a href='laporan.php?aksi=aset' target='_blank' class='btn btn-info' ><i class='fa fa-print' ></i></span></a></br></br>
+                            <div class='table-responsive'>
+                            <table id='example1' class='table table-bordered table-striped'>
+<thead>
+                                     <tr>
+                                         <th>No</th>
+                                         <th>judul</th>
+                                         <th>aksi</th>
+                                     </tr>
+                                 </thead>
+                 ";
+$no=0;                 
+$tebaru=mysqli_query($koneksi," SELECT * FROM berita WHERE jenis='halaman' ORDER BY id_berita DESC ");
+while ($t=mysqli_fetch_array($tebaru)){
+$no++;  
+                                 echo"<tbody>
+                                     <tr>
+                                         <td>$no</td>
+                                         <td>$t[judul]</td>
+                                         <td><a href='index.php?aksi=edithalaman&id_berita=$t[id_berita]' class='btn btn-info' >edit</a>
+                                             <a class='btn btn-info' href='hapus.php?aksi=hapushalaman&id_b=$t[id_berita]&gbr=$t[gambar]' onclick=\"return confirm ('Apakah yakin ingin menghapus $t[judul] ?')\">hapus</a>
+                                         </td>
+                                     </tr>                                      
+                                 </tbody>
+                                 
+                                 ";
+                                 
+}
+                            echo"</table>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+               </div>";			
+
+////////////////input admin			
+
+echo"			
+<div class='col-lg-12'>
+                        <div class='modal fade' id='uiModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                                            <h4 class='modal-title' id='H3'>Input Data</h4>
+                                        </div>
+                                        <div class='modal-body'>
+                                        <form id='form1' enctype='multipart/form-data' method='post' action='input.php?aksi=inputhalaman'>
+                                        <div class='form-group'>
+                                    <label>Judul</label>
+                                    <input type='text' class='form-control' name='jd'/><br>
+                                    <label>Isi</label>
+                                    <textarea id='text-ckeditor' class='form-control' name='isi'></textarea></br>
+                                    <script>CKEDITOR.replace('text-ckeditor');</script>
+                                
+                                    <label>Gambar</label>
+                                    <input type='file' class='smallInput' size='50'name='gambar'/><br><br />
+                                        <div class='modal-footer'>
+                                                                        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                        <button type='submit' class='btn btn-primary'>Save </button>
+                                                                    </div> </div>
+                                </form>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+		    </div>			
+"; 
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+elseif($_GET['aksi']=='edithalaman'){
+$tebaru=mysqli_query($koneksi," SELECT * FROM berita WHERE id_berita=$_GET[id_berita] ");
+$t=mysqli_fetch_array($tebaru);
+echo"
+<div class='row'>
+                <div class='col-lg-12'>
+                    <div class='panel panel-default'>
+                        <div class='panel-heading'>EDIT 
+                        </div>
+                        <div class='panel-body'>
+                        <form id='form1' enctype='multipart/form-data' method='post' action='edit.php?aksi=prosesedithalaman&id_b=$t[id_berita]&gb=$t[gambar]'>
+                        <div class='form-group'>
+                    <label>Judul</label>
+                    <input type='text' class='form-control' value='$t[judul]' name='jd'/><br>
+                    <label>Isi</label>
+                    <textarea id='text-ckeditor' class='form-control' name='isi'>$t[isi]</textarea></br>
+                    <script>CKEDITOR.replace('text-ckeditor');</script>
+                    <img  src='../foto/data/$t[gambar]' alt='Preview Gambar' style='max-width: 200px; max-height: 200px;'></br>
+                    <label>Gambar</label>
+                    <input type='file' class='smallInput' size='50'name='gambar'/><br><br />
+                        <div class='modal-footer'>
+                                                        <button type='submit' class='btn btn-primary'>Save </button>
+                                                    </div> </div>
+                </form>
+                        </div> 
+                    </div>
+                </div>
+</div>
+";
+}
+
 elseif($_GET['aksi']=='informasi'){
 echo"<div class='row'>
                 <div class='col-lg-12'>
@@ -295,7 +405,7 @@ echo"<div class='row'>
                                  </thead>
                  ";
 $no=0;                 
-$tebaru=mysqli_query($koneksi," SELECT * FROM berita ORDER BY id_berita DESC ");
+$tebaru=mysqli_query($koneksi," SELECT * FROM berita WHERE jenis='informasi' ORDER BY id_berita DESC ");
 while ($t=mysqli_fetch_array($tebaru)){
 $no++;  
                                  echo"<tbody>
@@ -561,8 +671,7 @@ elseif($_GET['aksi']=='kritik'){
         
           ";			
     }
-    
-    
+
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
     
