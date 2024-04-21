@@ -76,7 +76,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>SET</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">SI ASET</span>
+          <span class="logo-lg">PUPR</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -90,7 +90,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../foto/logo.png" class="user-image" alt="User Image">
-                  <span class="hidden-xs">SI ASET </span>
+                  <span class="hidden-xs">SI PUPR </span>
                 </a>
                
               </li>
