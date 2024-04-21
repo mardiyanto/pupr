@@ -43,11 +43,11 @@ while ($r=mysqli_fetch_array($sql)){
                     </div>
                 </div>
                 <a href="utama.php?aksi=informasi" class="nav-item nav-link">informasi</a>
-                <a href="service.html" class="nav-item nav-link">Galery</a>
+                <a href="utama.php?aksi=galeri" class="nav-item nav-link">Galeri</a>
                 
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="utama.php?aksi=hubungi" class="nav-item nav-link">Hubungi Kami</a>
             </div>
-            <a href="" class="btn btn-primary px-3 d-none d-lg-block">Layanan</a>
+            <a href="https://sippn.menpan.go.id/instansi/174327/pemerintah-kab-tanggamus/dinas-pekerjaan-umum-dan-perumahan-rakyat"  target='blank' class="btn btn-primary px-3 d-none d-lg-block">Layanan</a>
         </div>
     </nav>
     <!-- Navbar End -->
