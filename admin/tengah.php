@@ -14,7 +14,7 @@ echo"
 			</div>
                    </div>
 </div>";
-include "grafik.php";
+
 echo"<div class='row'>
                     <div class='col-xs-12'>
               <div class='panel panel-primary'>
@@ -23,17 +23,23 @@ echo"<div class='row'>
                 </div>
                 <div class='box-header'>
 				</div>
-     <div class='box-body'>";
-     $main=mysqli_query($koneksi,"SELECT * FROM submenu");
-
-     while($r=mysqli_fetch_array($main)){           
-     echo"<a href='$r[link_sub]' class='btn btn-app'>
+     <div class='box-body'>
+     <a href='index.php?aksi=informasi' class='btn btn-app'>
                     <span class='badge bg-yellow'>3</span>
-                    <i class='fa $r[icon_sub] fa-5x'></i> $r[nama_sub]
-                  </a>";
-                }           
-                echo "
-
+                    <i class='fa fa-arrows-h fa-5x'></i> Informasi
+                  </a>
+                  <a href='index.php?aksi=galeri' class='btn btn-app'>
+                  <span class='badge bg-yellow'>3</span>
+                  <i class='fa fa-arrows-h fa-5x'></i> Galeri
+                </a>
+                <a href='index.php?aksi=halaman' class='btn btn-app'>
+                <span class='badge bg-yellow'>3</span>
+                <i class='fa fa-arrows-h fa-5x'></i> Halaman
+              </a>    
+              <a href='index.php?aksi=kritik' class='btn btn-app'>
+              <span class='badge bg-yellow'>3</span>
+              <i class='fa fa-arrows-h fa-5x'></i> Kritik
+            </a>
             </div>
 			</div>
  </div>

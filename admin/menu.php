@@ -18,6 +18,7 @@
                 <li><a href='index.php?aksi=informasi'><i class='fa fa-arrows-h'></i>INFORMASI</a></li>
                 <li><a href='index.php?aksi=galeri'><i class='fa fa-arrows-h'></i>GALERY</a></li>
                 <li><a href='index.php?aksi=halaman'><i class='fa fa-arrows-h'></i>HALAMAN</a></li>
+                <li><a href='index.php?aksi=kritik'><i class='fa fa-arrows-h'></i>KRITIK</a></li>
                </ul>
 </li>
 <li><a href="index.php?aksi=admin"><i class="fa fa-users"></i> <span>ADMIN</span></a></li>
